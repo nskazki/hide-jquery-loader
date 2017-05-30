@@ -1,0 +1,12 @@
+{
+  "name": "hide-jquery-loader",
+  "version": "1.0.0",
+  "description": "simplest way to protect your angular widget from unpredictable legacy",
+  "main": "index.js",
+  "repository": "https://github.com/nskazki/reassign-angular-loader",
+  "author": "nskazki <nskazki@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "webpack": "^1.13.3"
+  }
+}
