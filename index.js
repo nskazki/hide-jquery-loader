@@ -11,13 +11,17 @@ module.exports = function hideJqueryLoader(source) {
   return `
 /* HIDE JQUERY LOADER -- https://github.com/nskazki/hide-jquery-loader */
 
-var ${$Orig} = window.$;
-var ${jQueryOrig} = window.jQuery;
-delete window.$;
-delete window.jQuery;
+var _window
+try { _window = Function('return this')() || (42, eval)('this'); }
+catch (_err) { _window = window || global || GLOBAL || {}; }
+
+var ${$Orig} = _window.$;
+var ${jQueryOrig} = _window.jQuery;
+delete _window.$;
+delete _window.jQuery;
 
 ${source};
 
-window.$ = ${$Orig};
-window.jQuery = ${jQueryOrig};`
+_window.$ = ${$Orig};
+_window.jQuery = ${jQueryOrig};`
 }
