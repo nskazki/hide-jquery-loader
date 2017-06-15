@@ -17,8 +17,8 @@ module.exports = function hideJqueryLoader(source) {
 
     var ${$Orig} = _window.$;
     var ${jQueryOrig} = _window.jQuery;
-    delete _window.$;
-    delete _window.jQuery;`)
+    _window.$ = undefined;
+    _window.jQuery = undefined;`)
 
   const footer = deline(`
     /* HIDE JQUERY LOADER FOOTER -- https://github.com/nskazki/hide-jquery-loader */
