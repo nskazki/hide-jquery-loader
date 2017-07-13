@@ -1,13 +1,11 @@
 'use strict'
 
-let _uniqueId = 0
-const uniqueId = () => ++_uniqueId
 const deline = str => str.replace(/[\r\n]/g, ' ').replace(/\s{2,}/g, ' ')
 
 module.exports = function hideJqueryLoader(source) {
   this.cacheable()
-  const $Orig = `__$__orig__${uniqueId()}`
-  const jQueryOrig = `__jQuery__orig__${uniqueId()}`
+  const $Orig = '__hide_jquery_loader_$__orig'
+  const jQueryOrig = '__hide_jquery_loader_jQuery__orig'
 
   const header = deline(`
     /* HIDE JQUERY LOADER HEADER -- https://github.com/nskazki/hide-jquery-loader */
