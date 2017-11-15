@@ -4,24 +4,22 @@ const deline = str => str.replace(/[\r\n]/g, ' ').replace(/\s{2,}/g, ' ')
 
 module.exports = function hideJqueryLoader(source) {
   this.cacheable()
-  const $Orig = '__hide_jquery_loader_$__orig'
-  const jQueryOrig = '__hide_jquery_loader_jQuery__orig'
+  const shotOrigName = '__hjl_shorOrig'
+  const fullOrigName = '__hjl_fullOrig'
+  const windowRefName = '__hjl_windowRef'
 
   const header = deline(`
-    /* HIDE JQUERY LOADER HEADER -- https://github.com/nskazki/hide-jquery-loader */
-    var _window;
-    try { _window = Function('return this')() || (42, eval)('this'); }
-    catch (_err) { _window = window || global || GLOBAL || {}; }
-
-    var ${$Orig} = _window.$;
-    var ${jQueryOrig} = _window.jQuery;
-    _window.$ = undefined;
-    _window.jQuery = undefined;`)
+    /* HIDE JQUERY LOADER -- HEADER */
+    var ${windowRefName} = window || global || {};
+    var ${shotOrigName} = ${windowRefName}.$;
+    var ${fullOrigName} = ${windowRefName}.jQuery;
+    ${windowRefName}.$ = undefined;
+    ${windowRefName}.jQuery = undefined;`)
 
   const footer = deline(`
-    /* HIDE JQUERY LOADER FOOTER -- https://github.com/nskazki/hide-jquery-loader */
-    _window.$ = ${$Orig};
-    _window.jQuery = ${jQueryOrig};`)
+    /* HIDE JQUERY LOADER -- FOOTER */
+    ${windowRefName}.$ = ${shotOrigName};
+    ${windowRefName}.jQuery = ${fullOrigName};`)
 
   return `${header} ${source}; ${footer}`
 }
