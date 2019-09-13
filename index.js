@@ -10,7 +10,7 @@ module.exports = function hideJqueryLoader(source) {
 
   const header = deline(`
     /* HIDE JQUERY LOADER -- HEADER */
-    var ${windowRefName} = window || global || {};
+    var ${windowRefName} = typeof window !== 'undefined' ? window : {};
     var ${shotOrigName} = ${windowRefName}.$;
     var ${fullOrigName} = ${windowRefName}.jQuery;
     ${windowRefName}.$ = undefined;
